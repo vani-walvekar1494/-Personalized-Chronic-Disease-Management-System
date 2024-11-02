@@ -5,27 +5,24 @@ The Personalized Chronic Disease Management System (PCDMS) is a web application 
 
 It provides a user-friendly interface for monitoring symptoms and helps in managing health better.
 
-## Project Structure
+# Project Structure
 
-pcdms/
-│
-├── app.py                       # Main application file
-├── config.py                    # Configuration settings
-├── requirements.txt             # Required packages
-│
-├── templates/                   # HTML templates
-│   ├── base.html                # Base HTML template
-│   ├── login.html               # Login page
-│   ├── register.html            # Registration page
-│   ├── dashboard.html            # User dashboard
-│   ├── log_symptoms.html        # Symptom logging page
-│
-├── static/                      # Static files (CSS, JS)
-│   ├── styles.css               # Stylesheet
-│
-├── models.py                    # Database models
-├── forms.py                     # Forms for user input
-└── chatbot.py                   # AI chatbot logic (placeholder)
+- **pcdms/**
+  - `app.py`                  # Main application file
+  - `config.py`               # Configuration settings
+  - `requirements.txt`        # Required packages
+  - **templates/**            # HTML templates
+    - `base.html`             # Base HTML template
+    - `login.html`            # Login page
+    - `register.html`         # Registration page
+    - `dashboard.html`        # User dashboard
+    - `log_symptoms.html`     # Symptom logging page
+  - **static/**               # Static files (CSS, JS)
+    - `styles.css`            # Stylesheet
+    - `models.py`             # Database models
+    - `forms.py`              # Forms for user input
+    - `chatbot.py`            # AI chatbot logic (placeholder)
+
 
 
 

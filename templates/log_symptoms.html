@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Log a Symptom</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.symptom.label }} {{ form.symptom(cols=40, rows=5) }}<br>
+    {{ form.submit() }}
+</form>
+{% endblock %}

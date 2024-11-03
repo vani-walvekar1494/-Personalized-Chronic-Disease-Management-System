@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>User Dashboard</h2>
+<h3>Logged Symptoms</h3>
+<ul>
+    {% for symptom in symptoms %}
+        <li>{{ symptom[2] }} ({{ symptom[3] }})</li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('log_symptom') }}">Log New Symptom</a>
+{% endblock %}

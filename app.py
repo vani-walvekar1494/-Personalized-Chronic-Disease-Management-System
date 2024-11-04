@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, LoginForm, SymptomForm
 from models import User, Symptom
+from flask import jsonify
 import bcrypt
 import secrets
 secrets.token_hex(16)
@@ -88,14 +89,20 @@ def get_recommendations(symptoms):
         recommendations.append("Practice relaxation techniques like deep breathing or meditation.")
     # Add more symptom-recommendation mappings here.
     return recommendations
-from flask import jsonify
 
-@app.route('/get_symptom_data')
+
+@app.route('/get_symptom_data', methods=['GET'])
 def get_symptom_data():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT date, symptom, severity FROM symptoms WHERE user_id=%s", (session['user_id'],))
+    cur.execute("SELECT date, severity FROM symptoms WHERE user_id = %s", (current_user.id,))
     data = cur.fetchall()
-    return jsonify(data)
+    cur.close()
+
+    # Transform data into a format suitable for Chart.js
+    dates = [str(row[0]) for row in data]  # Assuming the first column is the date
+    severities = [row[1] for row in data]  # Assuming the second column is the severity
+
+    return jsonify({"dates": dates, "severities": severities})
 
 
 @app.route('/logout')
@@ -113,6 +120,19 @@ def generate_plan():
     mysql.connection.commit()
     return redirect(url_for('dashboard'))
 
+@app.route('/get_recommendations', methods=['GET'])
+def get_recommendations():
+    # Here you would typically analyze the user's symptoms from the database
+    # and generate personalized recommendations.
+
+    # For example purposes, let's return a static list of recommendations.
+    recommendations = [
+        "Consider increasing your water intake.",
+        "Try to exercise at least 30 minutes a day.",
+        "Practice mindfulness or meditation to manage stress."
+    ]
+    
+    return jsonify(recommendations)
 
 if __name__ == '__main__':
     app.run(debug=True)
